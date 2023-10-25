@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: pgn-manager
+Version: 1.2.7
+Summary: library for managing pgn files
+Author: Luca Canali
+Author-email: lucacanali.dev@gmail.com

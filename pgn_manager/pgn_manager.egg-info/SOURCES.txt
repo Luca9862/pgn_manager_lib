@@ -1,0 +1,9 @@
+README.md
+setup.py
+pgn_manager/__init__.py
+pgn_manager/pmanager.py
+pgn_manager.egg-info/PKG-INFO
+pgn_manager.egg-info/SOURCES.txt
+pgn_manager.egg-info/dependency_links.txt
+pgn_manager.egg-info/requires.txt
+pgn_manager.egg-info/top_level.txt
