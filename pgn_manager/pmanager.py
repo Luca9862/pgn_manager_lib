@@ -1,3 +1,8 @@
+# Copyright (c) 2023, Luca Canali
+#
+#
+# Author: [Luca Canali]
+
 import csv
 import io
 import chess
