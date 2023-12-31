@@ -4,6 +4,8 @@
 # Author: [Luca Canali]
 
 from pgn_manager.pmanager import _readPGN
+import io
+import chess
 
 
 #1--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -82,7 +84,7 @@ def filter_player_win(pgn, player):
             games_filtered.append(game)
     return games_filtered
 
-def filter_player_win_white(pgn, player):
+def filter_player_win_white(pgn_path, player):
     """
     Filters a PGN file to only include games where the specified player wins as White.
 
@@ -93,12 +95,22 @@ def filter_player_win_white(pgn, player):
     Returns:
         A list of games where the specified player wins as White.
     """
-    games = _readPGN(pgn)
+    with open(pgn_path) as pgn_file:
+        pgn_content = pgn_file.read()
+
+    pgn = io.StringIO(pgn_content)
     games_filtered = []
-    for game in games:
-        if player in game.headers.get('White') and game.headers.get('Result') == '1-0':
+
+    while True:
+        game = chess.pgn.read_game(pgn)
+        if game is None:
+            break  # Esci dal loop se non ci sono più giochi nel file PGN
+    
+        result = game.headers["Result"]
+    
+        if result == "1-0":
             games_filtered.append(game)
-    return games_filtered
+    
 
 def filter_player_win_black(pgn, player):
     """
@@ -174,34 +186,8 @@ def filter_player_lose_black(pgn, player):
         if player in game.headers.get('Black') and game.headers.get('Result') == '1-0':
             games_filtered.append(game)
     return games_filtered
+
 #4--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# TODO:function review necessity (don't use)
-'''
-def filter_player_draws(pgn, player):
-    games = _readPGN(pgn)
-    games_filtered = []
-    for game in games:
-        if (player in game.headers.get('White') or player in game.headers.get('Black')) and game.headers.get('Result') == '1/2-1/2': 
-            games_filtered.append(game)
-    return games_filtered
-
-def filter_player_draw_white(pgn, player):
-    games = _readPGN(pgn)
-    games_filtered = []
-    for game in games:
-        if player in game.headers.get('White') and game.headers.get('Result') == '1/2-1/2': 
-            games_filtered.append(game)
-    return games_filtered
-
-def filter_player_draw_black(pgn, player):
-    games = _readPGN(pgn)
-    games_filtered = []
-    for game in games:
-        if player in game.headers.get('Black') and game.headers.get('Result') == '1/2-1/2': 
-            games_filtered.append(game)
-    return games_filtered
-'''
-#5--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def filter_for_eco(pgn, eco):
     """
     Filters a PGN file to only include games that use the specified ECO code.
@@ -258,7 +244,7 @@ def filter_for_white_player_eco_win(pgn, eco, player):
             games_filtered.append(game)
     return games_filtered
 
-#6--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#5--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def filter_time_control(pgn, time): 
     """Filters a list of PGN games based on the specified time control.
 
