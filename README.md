@@ -12,7 +12,7 @@ or
 
 `pip install pgn-manager`
 
-Example of use [_readPGN(path)]:
+Example of use [_readPGN(path)] and [split_pgn(path)]:
 
 ```shell
 from pgn_manager import _readPGN
@@ -25,3 +25,17 @@ def main(filename):
     wins = 0
     loses = 0
     draws = 0
+
+
+from pgn_manager import merge_pgn, split_pgn, writeMatchesIntoCsv
+
+#This function is utilized in the implementation of a graphical interface. It takes as input the path of the PGN file and a destination folder.
+
+def on_button_split():
+    text1 = str(text_box_search_file_pgn_split.get(1.0, 'end-1c')) #PGN path
+    text2 = str(text_box_path_pgn_split.get(1.0, 'end-1c')) #Destination folder
+    if text1 == '' or text2 == '':
+        messagebox.showerror('Error', 'Fields cannot be empty.')
+        return
+    split_pgn(text1, text2)
+    messagebox.showinfo('Success!', 'split completed')
