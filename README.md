@@ -1,7 +1,7 @@
 # pgn_manager
 
 pgn manager is a library for managing and manipulating pgn files.
-Library has two modules: pmanager and pfilter
+
 ## Installation
 
 You can install this library using `pip`:
