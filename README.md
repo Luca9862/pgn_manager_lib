@@ -6,9 +6,11 @@ pgn manager is a library for managing and manipulating pgn files.
 
 You can install this library using `pip`:
 
-`pip install pgn-manager`
-or
 `pip install pgn_manager`
+
+or
+
+`pip install pgn-manager`
 
 Example of use [_readPGN(path)]:
 
