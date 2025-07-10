@@ -1,5 +1,7 @@
 # pgn_manager
 
+[https://pypi.org/project/pgn-manager/](https://pypi.org/project/pgn-manager/)
+
 pgn manager is a library for managing and manipulating pgn files.
 
 ## Installation
